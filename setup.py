@@ -1,14 +1,19 @@
 import uuid
 
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
+# Workaround to maintain backwards compatibility from https://github.com/napalm-automation-community/napalm-fortios/pull/66
+try:
+    from pip._internal.req import parse_requirements
+except ImportError:
+    from pip.req import parse_requirements
 
-# parse_requirements() returns generator of pip.req.InstallRequirement objects
 install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
 
-# reqs is a list of requirement
-# e.g. ['django==1.5.1', 'mezzanine==1.4.6']
-reqs = [str(ir.req) for ir in install_reqs]
+# Workaround for new parse_requirements generator attributes to maintain backwards compatibility
+try:
+    reqs = [str(ir.req) for ir in install_reqs]
+except AttributeError:
+    reqs = [str(ir.requirement) for ir in install_reqs]
 
 setup(
     name="pyfg",
