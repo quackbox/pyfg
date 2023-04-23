@@ -1,3 +1,16 @@
+This is a fork of the deprecated [spotify/pyfg](https://github.com/spotify/pyfg) API, which adds workarounds for new pip versions, while maintaining backwards compatibility with pip < 10.0.0.
+
+Build locally with the following:
+
+```
+git clone https://github.com/quackbox/pyfg.git
+pip install -e pyfg
+```
+
+
+
+
+
 PyFG
 ====
 
